@@ -15,6 +15,7 @@ public class Send {
         String pass=scanner.next();
         System.out.println("port:");
         int port=scanner.nextInt();
+        String message="";
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
@@ -24,10 +25,13 @@ public class Send {
         for (int i=0; i<10; i++) {
             try (Connection connection = factory.newConnection();
                  Channel channel = connection.createChannel()) {
-                channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-                String message = "Hello World! message " + i;
-                channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-                System.out.println(" [x] Sent '" + message + "'");
+                channel.queueDeclare(QUEUE_NAME, false, false, false, null) ;
+                System.out.println("What shall I send???");
+                message = scanner.nextLine();
+                for(int j=0; j<3; j++) {
+                    channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+                    System.out.println(" [x] Sent '" + message + "'");
+                }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

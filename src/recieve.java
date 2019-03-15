@@ -31,7 +31,22 @@ public class recieve {
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + message + "'");
+            try{
+                doWork(message);
+            }catch(InterruptedException e){
+                System.out.println(e.getMessage());
+            }finally{
+                System.out.println("[x] done");
+            }
         };
+
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
+    }
+    public static void doWork(String message) throws InterruptedException {
+        for(char c:message.toCharArray()){
+            if (c=='.'){
+                Thread.sleep(3000);
+            }
+        }
     }
 }
