@@ -7,5 +7,5 @@ if you are running defaults, both your username and passoword will be guest
 the default port is 5672
 
 ## other side notes:
-ensure that you enable the management plugin with rabbitmq-plugins enable rabbitmq\_management
+ensure that you enable the management plugin with '''rabbitmq-plugins enable rabbitmq\_management'''
 go to http://localhost:15672 in your preferred and login with the above credentials to view the transmission of data in gui form
